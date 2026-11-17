@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>童軍新手三大基本功｜教學簡報</title>
+<style>
+  :root{
+    --green:#2f5d3a; --green-2:#3f7a4d; --khaki:#efe6cf; --paper:#fbf8f0;
+    --ink:#1f2a22; --muted:#5d6b60; --red:#c0392b; --yellow:#e9b923; --line:#d9cfb4;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;background:#1c2b20;font-family:"Noto Sans TC","Microsoft JhengHei","PingFang TC",sans-serif;color:var(--ink)}
+  .deck{position:relative;width:100vw;height:100vh;overflow:hidden}
+  .slide{position:absolute;inset:0;margin:auto;width:min(96vw,1280px);height:min(92vh,720px);
+    background:var(--paper);border-radius:18px;padding:48px 64px 56px;display:none;flex-direction:column;
+    box-shadow:0 20px 60px rgba(0,0,0,.35)}
+  .slide.active{display:flex;animation:in .35s ease}
+  @keyframes in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  .tag{display:inline-block;font-size:14px;font-weight:700;letter-spacing:.1em;color:#fff;background:var(--green-2);
+    padding:4px 12px;border-radius:999px;margin-bottom:14px;align-self:flex-start}
+  .tag.k{background:#8a6d2b}.tag.f{background:var(--red)}
+  h1{font-size:56px;line-height:1.2;color:var(--green)}
+  h2{font-size:38px;color:var(--green);margin-bottom:20px}
+  h3{font-size:22px;color:var(--green);margin-bottom:8px}
+  p,li,td,th{font-size:21px;line-height:1.6}
+  .muted{color:var(--muted)}
+  .src{position:absolute;left:64px;bottom:18px;font-size:13px;color:var(--muted)}
+  .src code{background:var(--khaki);padding:1px 6px;border-radius:4px}
+  .body{flex:1;min-height:0;display:flex;gap:32px}
+  .col{flex:1;min-width:0}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 22px}
+  .big{font-size:30px;font-weight:800;color:var(--green)}
+  .chant{display:inline-block;background:var(--yellow);color:#3b2c00;font-weight:800;font-size:26px;padding:6px 16px;border-radius:10px;margin:6px 0}
+  .warn{background:#fdecea;border-left:6px solid var(--red);padding:12px 16px;border-radius:8px;margin-top:14px}
+  .warn b{color:var(--red)}
+  ol.steps{counter-reset:s;list-style:none}
+  ol.steps li{counter-increment:s;padding-left:44px;position:relative;margin:8px 0}
+  ol.steps li::before{content:counter(s);position:absolute;left:0;top:2px;width:30px;height:30px;border-radius:50%;
+    background:var(--green);color:#fff;font-size:16px;font-weight:700;display:grid;place-items:center}
+  table{border-collapse:collapse;width:100%}
+  th,td{border-bottom:1px solid var(--line);padding:7px 10px;text-align:left}
+  th{color:var(--green);font-size:18px}
+  .grid12{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .grid12 div{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+  .grid12 b{display:block;font-size:24px;color:var(--green)}
+  .grid12 span{font-size:16px;color:var(--muted);line-height:1.4;display:block}
+  .grid12 i{font-style:normal;font-size:13px;color:#8a6d2b;font-weight:700}
+  .pill3{display:flex;gap:18px;margin-top:10px}
+  .pill3 .card{flex:1;text-align:center}
+  .pill3 .em{font-size:52px}
+  /* title */
+  .title{justify-content:center;background:linear-gradient(135deg,var(--green) 0%,#244a2e 100%);color:#fff}
+  .title h1{color:#fff;font-size:68px}
+  .title p{font-size:24px;color:#d8e6d6}
+  .title .src{color:#bcd0bb}.title .src code{background:rgba(255,255,255,.15)}
+  /* semaphore */
+  .sema{display:flex;gap:28px;align-items:center}
+  svg.fig{width:340px;height:340px;flex:none}
+  .keys{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+  .keys button{font:700 22px inherit;font-family:inherit;padding:10px 0;border-radius:10px;border:1px solid var(--line);background:#fff;cursor:pointer}
+  .keys button:hover{background:var(--khaki)}
+  .keys button.on{background:var(--green);color:#fff;border-color:var(--green)}
+  .keys button.sp{font-size:14px}
+  .readout{font-size:28px;font-weight:800;color:var(--green);margin:12px 0 4px}
+  /* quiz */
+  .q{margin-bottom:14px}
+  .q .opts{display:flex;gap:10px;margin-top:6px;flex-wrap:wrap}
+  .q button{font-family:inherit;font-size:19px;padding:8px 16px;border-radius:10px;border:1px solid var(--line);background:#fff;cursor:pointer}
+  .q button.ok{background:#dff3e2;border-color:var(--green-2)}
+  .q button.no{background:#fdecea;border-color:var(--red)}
+  .q .fb{font-size:17px;color:var(--muted);margin-top:4px;min-height:24px}
+  /* nav */
+  .nav{position:fixed;bottom:14px;right:22px;display:flex;gap:8px;align-items:center;z-index:5}
+  .nav button{width:42px;height:42px;border-radius:50%;border:none;background:rgba(255,255,255,.9);font-size:20px;cursor:pointer}
+  .nav span{color:#fff;background:rgba(31,42,34,.85);border-radius:999px;padding:6px 10px;font-size:14px;min-width:64px;text-align:center}
+  .bar{position:fixed;top:0;left:0;height:4px;background:var(--yellow);transition:width .3s;z-index:5}
+  @media (max-width:800px){.slide{padding:28px 22px 48px}.body{flex-direction:column;overflow:auto}h1{font-size:38px}h2{font-size:28px}.grid12{grid-template-columns:repeat(2,1fr)}.sema{flex-direction:column}svg.fig{width:240px;height:240px}.src{left:22px}}
+</style>
+</head>
+<body>
+<div class="bar" id="bar"></div>
+<div class="deck" id="deck">
+
+<!-- 1 封面 -->
+<section class="slide title active" data-src="index">
+  <span class="tag" style="background:var(--yellow);color:#3b2c00">童軍入門教學</span>
+  <h1>童軍新手<br>三大基本功</h1>
+  <p style="margin-top:18px">精神 × 繩結 × 旗語 ——第一次接觸童軍也能看懂</p>
+  <p style="margin-top:36px;font-size:17px">← → 方向鍵或空白鍵換頁</p>
+  <div class="src">來源：<code>wiki/index.md</code></div>
+</section>
+
+<!-- 2 地圖 -->
+<section class="slide" data-src="index">
+  <span class="tag">今天的路線</span>
+  <h2>學完你會…</h2>
+  <div class="pill3">
+    <div class="card"><div class="em">🤝</div><h3>① 童軍精神</h3><p>背得出諾言三事、規律十二條、銘言三句</p></div>
+    <div class="card"><div class="em">🪢</div><h3>② 繩結</h3><p>看懂名詞，知道什麼情況用什麼結，會打 4 個常用結</p></div>
+    <div class="card"><div class="em">🚩</div><h3>③ 旗語</h3><p>知道 8 個方向，打得出 SOS</p></div>
+  </div>
+  <p class="muted" style="margin-top:22px">為什麼是這三個？精神是童軍的「為什麼」，繩結和旗語是最基本的「怎麼做」。</p>
+  <div class="src">來源：<code>wiki/index.md</code></div>
+</section>
+
+<!-- 3 諾言 -->
+<section class="slide" data-src="童軍精神">
+  <span class="tag">① 童軍精神｜1/3</span>
+  <h2>童軍諾言：入團時的承諾</h2>
+  <div class="body">
+    <div class="col">
+      <div class="card">
+        <p class="muted">憑我的榮譽，我願盡力遵守童軍規律，終身奉行下列三事：</p>
+        <ol class="steps" style="margin-top:8px">
+          <li>敬天樂群，做一個堂堂正正的好國民。</li>
+          <li>隨時隨地扶助他人，服務社會。</li>
+          <li>力求自己智識、品德、體格之健全。</li>
+        </ol>
+      </div>
+    </div>
+    <div class="col" style="flex:.8">
+      <h3>什麼時候用到？</h3>
+      <p>初級童軍訓練合格後，在<b>宣誓入團儀式</b>背誦諾言，佩戴初級童軍章與團領巾。</p>
+      <p class="muted" style="margin-top:14px;font-size:17px">＊女童軍有另一個版本，這裡是中華民國童軍版本。</p>
+    </div>
+  </div>
+  <div class="src">來源：<code>wiki/童軍精神.md</code> ← raw/01_童軍諾言.txt</div>
+</section>
+
+<!-- 4 規律 -->
+<section class="slide" data-src="童軍精神">
+  <span class="tag">① 童軍精神｜2/3</span>
+  <h2>童軍規律十二條（順序固定）</h2>
+  <div class="grid12">
+    <div><i>1</i><b>誠實</b><span>真實不欺</span></div>
+    <div><i>2</i><b>忠孝</b><span>對國盡忠、對親盡孝</span></div>
+    <div><i>3</i><b>助人</b><span>每日一善，不受酬不居功</span></div>
+    <div><i>4</i><b>仁愛</b><span>尊重生命、維護自然</span></div>
+    <div><i>5</i><b>禮節</b><span>應對進退合乎規矩</span></div>
+    <div><i>6</i><b>公平</b><span>明辨是非、待人公正</span></div>
+    <div><i>7</i><b>負責</b><span>信守承諾、克盡職責</span></div>
+    <div><i>8</i><b>快樂</b><span>遇到困難也處之泰然</span></div>
+    <div><i>9</i><b>勤儉</b><span>不浪費時間和金錢</span></div>
+    <div><i>10</i><b>勇敢</b><span>不為利誘、不為威屈</span></div>
+    <div><i>11</i><b>整潔</b><span>身體用具整潔、心地光明</span></div>
+    <div><i>12</i><b>公德</b><span>愛惜公物、重視環保</span></div>
+  </div>
+  <div class="src">來源：<code>wiki/童軍精神.md</code> ← raw/02_童軍規律.txt</div>
+</section>
+
+<!-- 5 銘言 -->
+<section class="slide" data-src="童軍精神">
+  <span class="tag">① 童軍精神｜3/3</span>
+  <h2>童軍銘言：三句座右銘</h2>
+  <div class="pill3">
+    <div class="card"><div class="big">準備</div><p>全世界童軍共同的銘言：隨時在身心與技能上做好準備</p></div>
+    <div class="card"><div class="big">日行一善</div><p>每天至少一件好事，不受酬、不居功<br><span class="muted" style="font-size:16px">↔ 呼應規律第 3 條「助人」</span></p></div>
+    <div class="card"><div class="big">人生以服務為目的</div><p>把服務他人當生活方向<br><span class="muted" style="font-size:16px">12 月第一週週日＝全國童軍服務日</span></p></div>
+  </div>
+  <div class="src">來源：<code>wiki/童軍精神.md</code> ← raw/03_童軍銘言.txt</div>
+</section>
+
+<!-- 6 繩結名詞 -->
+<section class="slide" data-src="繩結基本名詞">
+  <span class="tag k">② 繩結｜1/5</span>
+  <h2>先認識四個名詞</h2>
+  <div class="body">
+    <div class="col">
+      <table>
+        <tr><th>名詞</th><th>意思</th></tr>
+        <tr><td><b>繩頭</b>（活端）</td><td>打結時<b>移動</b>的那一端</td></tr>
+        <tr><td><b>繩身</b>（主端）</td><td><b>不動</b>、承受拉力的那段</td></tr>
+        <tr><td><b>繩圈</b></td><td>繩子繞成的圈</td></tr>
+        <tr><td><b>繩耳</b></td><td>繩子對折形成的 U 形</td></tr>
+      </table>
+    </div>
+    <div class="col" style="flex:.8">
+      <h3>好繩結三原則</h3>
+      <p class="big">好打・好解・牢靠</p>
+      <div class="warn">⚠️ <b>打完一定要</b>拉緊、整理結形，再實際受力測試。</div>
+    </div>
+  </div>
+  <div class="src">來源：<code>wiki/繩結基本名詞.md</code> ← raw/04_繩結基本名詞.txt</div>
+</section>
+
+<!-- 7 選結 -->
+<section class="slide" data-src="繩結選擇指南">
+  <span class="tag k">② 繩結｜2/5</span>
+  <h2>什麼情況用什麼結？</h2>
+  <table>
+    <tr><th>我想要…</th><th>用這個結</th><th>我想要…</th><th>用這個結</th></tr>
+    <tr><td>接兩條<b>一樣粗</b>的繩</td><td>平結</td><td>繫木樁、營柱</td><td>雙套結</td></tr>
+    <tr><td>接兩條<b>不一樣粗</b>的繩</td><td>接繩結</td><td>拖、吊木頭</td><td>繫木結</td></tr>
+    <tr><td>⚠️ 做不會縮的圈（救援）</td><td>稱人結</td><td>提水瓶</td><td>瓶口結</td></tr>
+    <tr><td>防止繩子滑脫</td><td>八字結</td><td>調帳篷營繩鬆緊</td><td>營繩結</td></tr>
+    <tr><td>縮短繩子</td><td>縮繩結</td><td>綁竹竿搭營門</td><td>方回結</td></tr>
+  </table>
+  <p class="muted" style="margin-top:14px">接下來挑 4 個最常用的來學：平結、稱人結、雙套結、營繩結。</p>
+  <div class="src">來源：<code>wiki/繩結選擇指南.md</code> ← raw/04_繩結基本名詞.txt</div>
+</section>
+
+<!-- 8 平結 -->
+<section class="slide" data-src="平結">
+  <span class="tag k">② 繩結｜3/5</span>
+  <h2>平結：急救包紮最常用</h2>
+  <div class="body">
+    <div class="col">
+      <span class="chant">右壓左、左壓右</span>
+      <ol class="steps">
+        <li>兩繩頭交叉，右壓左繞一次</li>
+        <li>再左壓右繞一次</li>
+        <li>拉緊</li>
+      </ol>
+      <p style="margin-top:10px">用途：捆紮物件、接<b>一樣粗</b>的繩、綁三角巾（結形扁平，不會頂到傷患）</p>
+    </div>
+    <div class="col" style="flex:.85">
+      <div class="card"><h3>❌ 常見錯誤</h3><p>兩次都同方向壓 → 變成容易鬆脫的「<b>祖母結</b>」</p></div>
+      <div class="warn">⚠️ 粗細不同的繩用平結會滑脫，<b>不能承重或接長繩</b> → 改用接繩結</div>
+    </div>
+  </div>
+  <div class="src">來源：<code>wiki/平結.md</code> ← raw/05_平結.txt</div>
+</section>
+
+<!-- 9 稱人結 -->
+<section class="slide" data-src="稱人結">
+  <span class="tag k">② 繩結｜4/5</span>
+  <h2>稱人結：「結中之王」</h2>
+  <div class="body">
+    <div class="col">
+      <span class="chant">兔子出洞、繞大樹、回洞裡</span>
+      <ol class="steps">
+        <li>繩身做一個小繩圈（繩頭在上）＝洞</li>
+        <li>繩頭由下往上穿過小圈 —— 兔子出洞</li>
+        <li>繞到繩身後面 —— 繞大樹</li>
+        <li>從原路穿回小圈 —— 回洞裡，拉緊</li>
+      </ol>
+    </div>
+    <div class="col" style="flex:.85">
+      <div class="card"><h3>特點</h3><p>繩圈大小固定、<b>不會縮緊</b>；受力牢固，不受力時好解開。</p></div>
+      <div class="warn">⚠️ <b>救援用</b>：套在人身上拉人也不會勒住人。</div>
+    </div>
+  </div>
+  <div class="src">來源：<code>wiki/稱人結.md</code> ← raw/07_稱人結.txt</div>
+</section>
+
+<!-- 10 營地雙結 -->
+<section class="slide" data-src="雙套結,營繩結">
+  <span class="tag k">② 繩結｜5/5</span>
+  <h2>營地兩兄弟：雙套結＋營繩結</h2>
+  <div class="body">
+    <div class="col card">
+      <h3>雙套結｜繫木樁、營柱</h3>
+      <ol class="steps">
+        <li>繩頭繞柱一圈，壓過繩身</li>
+        <li>再繞柱第二圈</li>
+        <li>繩頭從第二圈底下穿出（兩圈呈 X 形），拉緊</li>
+      </ol>
+      <p class="muted" style="font-size:17px">也是方回結的起頭與收尾結。重要用途末端加打半結。</p>
+    </div>
+    <div class="col card">
+      <h3>營繩結｜調整帳篷營繩</h3>
+      <ol class="steps">
+        <li>繩頭繞過營釘</li>
+        <li>在繩身上（靠營釘側）往內繞兩圈</li>
+        <li>再往外繞一圈打半結，拉緊</li>
+      </ol>
+      <p class="muted" style="font-size:17px">推動結目就能調鬆緊；營頂皺紋越少、營脊越直越好。</p>
+    </div>
+  </div>
+  <div class="src">來源：<code>wiki/雙套結.md</code>、<code>wiki/營繩結.md</code> ← raw/06、raw/08</div>
+</section>
+
+<!-- 11 旗語方向 -->
+<section class="slide" data-src="旗語入門">
+  <span class="tag f">③ 旗語｜1/3</span>
+  <h2>旗語：用手臂角度傳字母</h2>
+  <div class="sema">
+    <svg class="fig" id="fig1" viewBox="-185 -205 370 380"></svg>
+    <div>
+      <p>雙手各拿一面紅黃旗，手臂指向 <b>8 個方向</b>（每格差 45°）。</p>
+      <p class="big" style="margin:10px 0">一個字母 ＝ 兩隻手臂的兩個方向</p>
+      <p>方向以<b>發信者自己的身體</b>為準：①正下 ②右下 ③右平 ④右上 ⑤正上 ⑥左上 ⑦左平 ⑧左下。</p>
+      <p class="muted" style="margin-top:10px;font-size:17px">圖是從發信者<b>背後</b>看，左右和你自己一樣。兩手都在①＝休息／空格。</p>
+    </div>
+  </div>
+  <div class="src">來源：<code>wiki/旗語入門.md</code> ← raw/15_旗語簡介與八個方向.txt</div>
+</section>
+
+<!-- 12 旗語互動 -->
+<section class="slide" data-src="旗語字母表">
+  <span class="tag f">③ 旗語｜2/3</span>
+  <h2>點字母，看手臂怎麼擺</h2>
+  <div class="sema">
+    <svg class="fig" id="fig2" viewBox="-185 -205 370 380"></svg>
+    <div style="flex:1">
+      <div class="keys" id="keys"></div>
+      <div class="readout" id="readout">點一個字母試試</div>
+      <p class="muted" style="font-size:17px">背法：每「圈」一手固定、另一手轉。第一圈 A–G 一手在①；第二圈 H–N 一手在②（跳過 J）…</p>
+      <p style="margin-top:8px"><button onclick="playWord('SOS')" style="font:700 18px inherit;font-family:inherit;padding:8px 16px;border-radius:10px;border:none;background:var(--red);color:#fff;cursor:pointer">▶ 播放 SOS</button>
+      <button onclick="playWord('HELP')" style="font:700 18px inherit;font-family:inherit;padding:8px 16px;border-radius:10px;border:1px solid var(--line);background:#fff;cursor:pointer">▶ 播放 HELP</button></p>
+    </div>
+  </div>
+  <div class="src">來源：<code>wiki/旗語字母表.md</code> ← raw/16、raw/17</div>
+</section>
+
+<!-- 13 數字要領 -->
+<section class="slide" data-src="旗語數字與要領">
+  <span class="tag f">③ 旗語｜3/3</span>
+  <h2>數字、特殊信號與打旗要領</h2>
+  <div class="body">
+    <div class="col">
+      <h3>打數字</h3>
+      <p>先打<b>數字符號</b>（⑤＋⑥）→ 之後都是數字 → 打 <b>J</b> 切回字母</p>
+      <table style="margin:8px 0 16px">
+        <tr><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>0</th></tr>
+        <tr><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td><td>H</td><td>I</td><td>K</td></tr>
+      </table>
+      <h3>特殊信號</h3>
+      <p>休息／空格：兩手正下方　取消：④＋⑧<br>錯誤：兩手反覆舉起放下 → 重打</p>
+    </div>
+    <div class="col card">
+      <h3>打旗要領</h3>
+      <ol class="steps">
+        <li>手臂伸直，旗與手臂一直線，角度準到 45°</li>
+        <li>每個字母停約 <b>1 秒</b>，字與字之間回休息</li>
+        <li>面向收信者、背景單純，必要時站高處</li>
+        <li>收信方有記錄員寫下字母再讀出</li>
+      </ol>
+    </div>
+  </div>
+  <div class="src">來源：<code>wiki/旗語數字與要領.md</code> ← raw/18_旗語數字與要領.txt</div>
+</section>
+
+<!-- 14 小測驗 -->
+<section class="slide" data-src="童軍精神,平結,稱人結,旗語字母表">
+  <span class="tag" style="background:var(--yellow);color:#3b2c00">小測驗</span>
+  <h2>考考你 🧠</h2>
+  <div class="q" data-a="1"><p>1. 童軍規律第 10 條是？</p><div class="opts"><button>負責</button><button>勇敢</button><button>整潔</button></div><div class="fb"></div></div>
+  <div class="q" data-a="0"><p>2. 兩條<b>粗細不同</b>的繩要接起來，該用？</p><div class="opts"><button>接繩結</button><button>平結</button><button>八字結</button></div><div class="fb"></div></div>
+  <div class="q" data-a="2"><p>3. 救援時套在人身上、不會勒住人的結是？</p><div class="opts"><button>雙套結</button><button>營繩結</button><button>稱人結</button></div><div class="fb"></div></div>
+  <div class="q" data-a="0"><p>4. 旗語 S 是哪兩個方向？</p><div class="opts"><button>③＋⑧</button><button>②＋③</button><button>①＋⑥</button></div><div class="fb"></div></div>
+  <div class="src">來源：<code>wiki/童軍精神.md</code>、<code>wiki/平結.md</code>、<code>wiki/稱人結.md</code>、<code>wiki/旗語字母表.md</code></div>
+</section>
+
+<!-- 15 總結 -->
+<section class="slide" data-src="index,log">
+  <span class="tag">總結</span>
+  <h2>三大基本功，一句話記住</h2>
+  <div class="pill3">
+    <div class="card"><div class="em">🤝</div><h3>精神</h3><p>諾言 3 事・規律 12 條・銘言 3 句</p></div>
+    <div class="card"><div class="em">🪢</div><h3>繩結</h3><p>先看用途再選結，打完一定要受力測試</p></div>
+    <div class="card"><div class="em">🚩</div><h3>旗語</h3><p>8 個方向、兩手一字母，先學 SOS</p></div>
+  </div>
+  <p class="muted" style="margin-top:22px;font-size:17px">本簡報所有內容皆來自「童軍基礎技能入門 LLM Wiki」，每頁左下角標註對應的 wiki 頁面與原始資料。實作時請依團上教練示範為準。</p>
+  <div class="src">來源：<code>wiki/index.md</code>、<code>wiki/log.md</code></div>
+</section>
+
+</div>
+<div class="nav"><button id="prev" aria-label="上一頁">‹</button><span id="pg"></span><button id="next" aria-label="下一頁">›</button></div>
+
+<script>
+// ===== 換頁 =====
+const slides=[...document.querySelectorAll('.slide')];let cur=0;
+function show(i){cur=Math.max(0,Math.min(slides.length-1,i));slides.forEach((s,k)=>s.classList.toggle('active',k===cur));
+  document.getElementById('pg').textContent=(cur+1)+' / '+slides.length;
+  document.getElementById('bar').style.width=((cur+1)/slides.length*100)+'%';
+  try{history.replaceState(null,'','#'+(cur+1))}catch(e){}}
+document.getElementById('prev').onclick=()=>show(cur-1);
+document.getElementById('next').onclick=()=>show(cur+1);
+document.addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(cur+1)}
+  if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(cur-1)}});
+let tx=null;document.addEventListener('touchstart',e=>tx=e.touches[0].clientX);
+document.addEventListener('touchend',e=>{if(tx===null)return;const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>50)show(cur+(d<0?1:-1));tx=null});
+show((parseInt(location.hash.slice(1))||1)-1);
+
+// ===== 旗語資料（取自 wiki/旗語字母表.md） =====
+const FLAGS={A:[1,2],B:[1,3],C:[1,4],D:[1,5],E:[1,6],F:[1,7],G:[1,8],
+  H:[2,3],I:[2,4],K:[2,5],L:[2,6],M:[2,7],N:[2,8],
+  O:[3,4],P:[3,5],Q:[3,6],R:[3,7],S:[3,8],
+  T:[4,5],U:[4,6],Y:[4,7],'取消':[4,8],
+  '數字符號':[5,6],J:[5,7],V:[5,8],W:[6,7],X:[6,8],Z:[7,8]};
+const CIRC='①②③④⑤⑥⑦⑧';
+// 背面視角：① 下、② 右下、③ 右、④ 右上、⑤ 上、⑥ 左上、⑦ 左、⑧ 左下
+function dirVec(n){const deg=180-(n-1)*45;const r=deg*Math.PI/180;return [Math.sin(r),-Math.cos(r)]}
+const NS='http://www.w3.org/2000/svg';
+function el(t,a){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e}
+function drawFigure(svg,dirs,labels){
+  svg.innerHTML='';
+  for(let n=1;n<=8;n++){const [x,y]=dirVec(n);
+    svg.appendChild(el('line',{x1:0,y1:-20,x2:x*125,y2:-20+y*125,stroke:'#e4dcc6','stroke-width':2,'stroke-dasharray':'4 5'}));
+    if(labels){const t=el('text',{x:x*150,y:-20+y*150+8,'text-anchor':'middle','font-size':22,fill:'#5d6b60','font-weight':700});t.textContent=CIRC[n-1];svg.appendChild(t)}}
+  svg.appendChild(el('circle',{cx:0,cy:-62,r:20,fill:'#2f5d3a'}));
+  svg.appendChild(el('rect',{x:-22,y:-40,width:44,height:78,rx:12,fill:'#2f5d3a'}));
+  svg.appendChild(el('rect',{x:-18,y:38,width:14,height:62,rx:6,fill:'#2f5d3a'}));
+  svg.appendChild(el('rect',{x:4,y:38,width:14,height:62,rx:6,fill:'#2f5d3a'}));
+  (dirs||[]).forEach(n=>{const [x,y]=dirVec(n);const ex=x*105,ey=-20+y*105;
+    svg.appendChild(el('line',{x1:0,y1:-20,x2:ex,y2:ey,stroke:'#2f5d3a','stroke-width':12,'stroke-linecap':'round'}));
+    const g=el('g',{transform:`translate(${ex},${ey}) rotate(${Math.atan2(y,x)*180/Math.PI})`});
+    g.appendChild(el('polygon',{points:'0,-2 34,-2 34,-36 0,-36',fill:'#e9b923'}));
+    g.appendChild(el('polygon',{points:'0,-2 0,-36 34,-36',fill:'#c0392b'}));
+    svg.appendChild(g)});
+}
+drawFigure(document.getElementById('fig1'),[],true);
+const fig2=document.getElementById('fig2');drawFigure(fig2,[1,1],true);
+const keys=document.getElementById('keys'),readout=document.getElementById('readout');
+function pick(k){const d=FLAGS[k];drawFigure(fig2,d,true);
+  readout.textContent=`${k} ＝ ${CIRC[d[0]-1]} ＋ ${CIRC[d[1]-1]}`;
+  keys.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.k===k))}
+'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').concat(['數字符號','取消']).forEach(k=>{
+  const b=document.createElement('button');b.textContent=k;b.dataset.k=k;if(k.length>1)b.className='sp';
+  b.onclick=()=>pick(k);keys.appendChild(b)});
+let timer=null;
+function playWord(w){clearInterval(timer);let i=0;const seq=w.split('');
+  const step=()=>{if(i>=seq.length){clearInterval(timer);drawFigure(fig2,[1,1],true);readout.textContent=w+' 播放完畢（回到休息姿勢）';return}
+    pick(seq[i]);readout.textContent=`${w}：第 ${i+1} 個字母 `+readout.textContent;i++};
+  step();timer=setInterval(step,1200)}
+
+// ===== 小測驗 =====
+document.querySelectorAll('.q').forEach(q=>{const a=+q.dataset.a;const bs=q.querySelectorAll('button');
+  bs.forEach((b,i)=>b.onclick=()=>{bs.forEach(x=>x.classList.remove('ok','no'));
+    b.classList.add(i===a?'ok':'no');q.querySelector('.fb').textContent=i===a?'✅ 答對了！':'再想想～答案在前面的投影片裡'})});
+</script>
+</body>
+</html>
